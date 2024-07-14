@@ -1,0 +1,88 @@
+/* CSS */
+body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef);
+}
+
+.left-side {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, #519631, #61c821);
+    height: 100vh; /* Mantém altura igual à altura da tela */
+}
+
+.content-wrapper {
+    width: 400px; /* Largura da div */
+    height: 297px; /* Altura da div */
+    padding: 20px;
+    background-color: #61c821;
+    color: black; /* Cor do texto "Bem vindo!" */
+    text-align: center; /* Centraliza o conteúdo */
+    display: flex; /* Flex container para centralizar verticalmente */
+    flex-direction: column; /* Ajusta para coluna */
+    justify-content: center; /* Centraliza verticalmente */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef); /* Gradiente radial da tela direita */
+    color: black; /* Cor do texto dentro do input */
+    font-size: 16px; /* Tamanho do texto dentro do input */
+}
+
+input::placeholder {
+    font-size: 16px; /* Tamanho desejado para o texto do placeholder */
+    color: black; /* Cor do texto do placeholder */
+    opacity: 0.8; /* Opacidade opcional */
+}
+
+button {
+    margin-top: 10px;
+    background-color: white;
+    color: green; /* Mantém a cor do texto do botão como verde */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-image: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef); /* Aplica o mesmo gradiente radial */
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+.right-side {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-side img {
+    width: 50%; /* Mantém a imagem com 50% da largura do contêiner pai */
+    height: auto;
+}
+
+.welcome-text {
+    font-size: 40px; /* Aumenta o tamanho da fonte para 40 pixels */
+}
+

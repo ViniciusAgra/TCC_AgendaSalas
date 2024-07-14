@@ -1,0 +1,56 @@
+$(document).ready(function() {
+    var gradientColors = ['#e3fdd9', '#e9fae4', '#f3ffef']; // Cores do gradiente
+    
+    // Aplica o gradiente radial no botão
+    var $button = $('button');
+    var gradient = 'radial-gradient(circle at 0% 0%, ' + gradientColors.join(', ') + ')';
+  
+    $button.css({
+        'background-image': gradient,
+        'color': 'green',
+        'padding': '10px 20px',
+        'border': 'none',
+        'border-radius': '5px',
+        'cursor': 'pointer'
+    });
+  
+    $button.hover(function() {
+        $(this).css('background-color', '#ddd');
+    }, function() {
+        $(this).css('background-color', 'white');
+    });
+
+    // Captura o evento de submissão do formulário de login
+    $('#loginForm').submit(function(event) {
+        // Previne o envio padrão do formulário
+        event.preventDefault();
+
+        // Obtém os valores dos campos de usuário e senha
+        var username = $('#username').val();
+        var password = $('#password').val();
+
+        // Verifica se o usuário e senha são válidos (exemplo: admin/admin)
+        if (username === 'admin' && password === 'admin') {
+            // Redireciona para o outro site
+            window.location.href = 'tipo.html';
+        } else {
+            // Exibe um alerta de usuário ou senha inválidos
+            alert('Usuário ou senha inválidos. Tente novamente.');
+        }
+    });
+
+    // Aplica o gradiente radial nos inputs
+    $('.input-wrapper').each(function() {
+        var $input = $(this).find('input');
+        var gradient = 'radial-gradient(circle at 0% 0%, ' + gradientColors.join(', ') + ')';
+        
+        $input.css({
+            'background-image': gradient,
+            'color': 'black',
+            'padding': '10px',
+            'border-radius': '5px',
+            'border': 'none',
+            'width': '100%'
+        });
+    });
+});
