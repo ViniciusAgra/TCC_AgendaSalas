@@ -38,6 +38,7 @@ form {
     position: relative;
     width: 100%;
     margin: 10px 0;
+    padding-right: 20px;
 }
 
 input {

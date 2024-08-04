@@ -1,7 +1,5 @@
 $(document).ready(function() {
     var gradientColors = ['#e3fdd9', '#e9fae4', '#f3ffef']; // Cores do gradiente
-    
-    // Aplica o gradiente radial no botão
     var $button = $('button');
     var gradient = 'radial-gradient(circle at 0% 0%, ' + gradientColors.join(', ') + ')';
   
@@ -20,7 +18,20 @@ $(document).ready(function() {
         $(this).css('background-color', 'white');
     });
 
-    // Captura o evento de submissão do formulário de login
+    $('.input-wrapper').each(function() {
+        var $input = $(this).find('input');
+        var gradient = 'radial-gradient(circle at 0% 0%, ' + gradientColors.join(', ') + ')';
+        
+        $input.css({
+            'background-image': gradient,
+            'color': 'black',
+            'padding': '10px',
+            'border-radius': '5px',
+            'border': 'none',
+            'width': '100%'
+        });
+    });
+
     $('#loginForm').submit(function(event) {
         // Previne o envio padrão do formulário
         event.preventDefault();
@@ -37,20 +48,5 @@ $(document).ready(function() {
             // Exibe um alerta de usuário ou senha inválidos
             alert('Usuário ou senha inválidos. Tente novamente.');
         }
-    });
-
-    // Aplica o gradiente radial nos inputs
-    $('.input-wrapper').each(function() {
-        var $input = $(this).find('input');
-        var gradient = 'radial-gradient(circle at 0% 0%, ' + gradientColors.join(', ') + ')';
-        
-        $input.css({
-            'background-image': gradient,
-            'color': 'black',
-            'padding': '10px',
-            'border-radius': '5px',
-            'border': 'none',
-            'width': '100%'
-        });
     });
 });
