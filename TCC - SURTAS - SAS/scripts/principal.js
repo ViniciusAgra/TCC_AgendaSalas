@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     // Create table header with time slots
     const $theadRow = $table.find('thead tr');
+
     for (let hour = startTime; hour < endTime; hour++) {
         for (let minute = 0; minute < 60; minute += 30) {
             const time = `${hour}:${minute === 0 ? '00' : minute}`;
@@ -19,7 +20,7 @@ $(document).ready(function() {
     const $tbody = $table.find('tbody');
     locations.forEach(location => {
         const $tr = $('<tr></tr>');
-        const $tdLoc = $(`<td class="location-cell">${location}</td>`); // Added class here
+        const $tdLoc = $(`<td class="location-cell">${location}</td>`); // Não precisa mais de colspan
         $tr.append($tdLoc);
 
         for (let hour = startTime; hour < endTime; hour++) {
