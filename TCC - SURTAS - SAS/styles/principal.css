@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#schedule-table th, #schedule-table td {
+    border: 1px solid #646060;
+    padding: 0; /* Remove padding das células */
+    margin: 0; /* Remove margem das células */
+    text-align: center;
+    vertical-align: middle; /* Centraliza verticalmente */
+    box-sizing: border-box; /* Inclui bordas e padding no cálculo do tamanho */
+    width: 1pc !important;  /* Defina a largura fixa das células */
+    height: 2pc; /* Defina a altura fixa das células */
+    overflow: hidden;
+}
+
+#schedule-table th {
+    background-color: #ff8c08;
+}
+
+.location-cell {
+    font-weight: bold;
+    background-color: #33ff00;
+    text-align: left;
+}
+
+td {
+    position: relative; /* Necessário para o posicionamento absoluto dos quadradinhos */
+}
+
+.time-slot {
+    width: 100%; /* Preenche toda a largura da célula */
+    height: 100%; /* Preenche toda a altura da célula */
+    background-color: #b3ffb3;
+    cursor: pointer;
+    box-sizing: border-box; /* Garante que bordas e padding não afetem o tamanho */
+    position: absolute; /* Permite que o quadradinho ocupe toda a célula */
+    top: 0; /* Posiciona no topo da célula */
+    left: 0; /* Posiciona à esquerda da célula */
+    overflow: hidden;
+}

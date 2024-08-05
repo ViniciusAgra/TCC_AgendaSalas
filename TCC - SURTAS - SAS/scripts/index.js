@@ -43,7 +43,7 @@ $(document).ready(function() {
         // Verifica se o usuário e senha são válidos (exemplo: admin/admin)
         if (username === 'admin' && password === 'admin') {
             // Redireciona para o outro site
-            window.location.href = 'tipo.html';
+            window.location.href = 'principal.html';
         } else {
             // Exibe um alerta de usuário ou senha inválidos
             alert('Usuário ou senha inválidos. Tente novamente.');
