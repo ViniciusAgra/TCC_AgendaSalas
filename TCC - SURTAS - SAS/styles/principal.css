@@ -1,10 +1,49 @@
 body {
     font-family: Arial, sans-serif;
     font-size: 10px; /* Diminui o tamanho da fonte global */
+    background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef);
+    margin: 0; /* Remove margem padrão do body */
+    padding: 0; /* Remove padding padrão do body */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 1px;
+}
+
+.header h1{
+    font-size:xx-large;
+}
+
+.header-image-IFSP{
+    height: 85px; /* Ajuste a altura das imagens conforme necessário */
+    padding-left: 100px;
+    padding-right: 20px;
+}
+.header-image-SAS {
+    height: 100px; /* Ajuste a altura das imagens conforme necessário */
+    margin: 0 10px; /* Ajuste a margem para deixar espaço entre as imagens e o texto */
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.header-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 5px;
+}
+
+.header-button img {
+    height: 30px; /* Ajuste a altura dos botões conforme necessário */
 }
 
 .container {
-    width: 100%;
+    width: 95%;
     margin: 0 auto;
     text-align: center;
 }
@@ -28,7 +67,7 @@ body {
 }
 
 #schedule-table th {
-    background-color: #ff8c08;
+    background: linear-gradient(135deg, #FFA000, #D19A3A);;
 }
 
 .location-cell {
