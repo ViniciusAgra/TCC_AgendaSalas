@@ -1,6 +1,7 @@
-create DATABASE teste;
+CREATE DATABASE IF NOT EXISTS DBSAS;
+USE DBSAS;
 	
-CREATE TABLE `usuario` (
+CREATE TABLE IF NOT EXISTS `usuario` (
   `Prontuario` varchar(10) NOT NULL,
   `Nome` varchar(45) NOT NULL,
   `Email` varchar(45) NOT NULL,
@@ -9,21 +10,21 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`Prontuario`)
 );
 
-CREATE TABLE `turma` (
+CREATE TABLE IF NOT EXISTS `turma` (
   `ID_Turma` int NOT NULL AUTO_INCREMENT,
   `Periodo_ou_ano` int NOT NULL,
   `Curso` varchar(50) NOT NULL,
   PRIMARY KEY (`ID_Turma`)
 );
 
-CREATE TABLE `sala` (
+CREATE TABLE IF NOT EXISTS `sala` (
   `ID_Sala` int NOT NULL,
   `Bloco` int NOT NULL,
   `Nome` varchar(30) NOT NULL,
   PRIMARY KEY (`ID_Sala`)
 );
 
-CREATE TABLE `reserva` (
+CREATE TABLE IF NOT EXISTS `reserva` (
   `ID_Reserva` int NOT NULL AUTO_INCREMENT,
   `Sala` int NOT NULL,
   `Turma` int NOT NULL,
