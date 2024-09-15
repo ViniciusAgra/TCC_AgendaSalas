@@ -1,4 +1,3 @@
-/* CSS */
 body {
     margin: 0;
     display: flex;
@@ -13,19 +12,22 @@ body {
     justify-content: center;
     align-items: center;
     background: linear-gradient(90deg, #519631, #61c821);
-    height: 100vh; /* Mantém altura igual à altura da tela */
+    height: 100vh;
 }
 
 .content-wrapper {
-    width: 400px; /* Largura da div */
-    height: 297px; /* Altura da div */
+    width: 400px;
+    height: 297px;
     padding: 20px;
     background-color: #61c821;
-    color: black; /* Cor do texto "Bem vindo!" */
-    text-align: center; /* Centraliza o conteúdo */
-    display: flex; /* Flex container para centralizar verticalmente */
-    flex-direction: column; /* Ajusta para coluna */
-    justify-content: center; /* Centraliza verticalmente */
+    color: black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid #4e8230;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 form {
@@ -38,37 +40,64 @@ form {
     position: relative;
     width: 100%;
     margin: 10px 0;
-    padding-right: 20px;
 }
 
 input {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef); /* Gradiente radial da tela direita */
-    color: black; /* Cor do texto dentro do input */
-    font-size: 16px; /* Tamanho do texto dentro do input */
+    background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef);
+    color: black;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#username {
+    width: calc(100% - 40px); /* Ajusta a largura do input de username */
+}
+
+#password {
+    width: calc(100% - 40px); /* Ajusta a largura do input de senha para ficar um pouco menor */
 }
 
 input::placeholder {
-    font-size: 16px; /* Tamanho desejado para o texto do placeholder */
-    color: black; /* Cor do texto do placeholder */
-    opacity: 0.8; /* Opacidade opcional */
+    font-size: 16px;
+    color: black;
+    opacity: 0.8;
 }
 
 button {
     margin-top: 10px;
     background-color: white;
-    color: green; /* Mantém a cor do texto do botão como verde */
+    color: green;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-image: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef); /* Aplica o mesmo gradiente radial */
+    background-image: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef);
 }
 
 button:hover {
     background-color: #ddd;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-67%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1; /* Garante que o botão de olhinho esteja acima do input */
+}
+.toggle-password:hover {
+    background: none;
+}
+
+.toggle-password img {
+    width: 30px;
+    height: auto;
 }
 
 .right-side {
@@ -79,11 +108,17 @@ button:hover {
 }
 
 .right-side img {
-    width: 50%; /* Mantém a imagem com 50% da largura do contêiner pai */
+    width: 50%;
     height: auto;
 }
 
 .welcome-text {
-    font-size: 40px; /* Aumenta o tamanho da fonte para 40 pixels */
+    font-size: 40px;
 }
 
+#error-message {
+    color: #300101;
+    font-weight: bold;
+    margin-top: 10px;
+    display: none;
+}
