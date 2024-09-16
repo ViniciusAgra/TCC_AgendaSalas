@@ -1,100 +1,160 @@
 body {
     font-family: Arial, sans-serif;
-    font-size: 10px; /* Diminui o tamanho da fonte global */
-    background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef);
-    margin: 0; /* Remove margem padrão do body */
-    padding: 0; /* Remove padding padrão do body */
+    font-size: 10px;
+    background: linear-gradient(90deg, #dbffcc, #e0fad8);
+    margin: 0;
+    padding: 1px; /* Adiciona um espaço entre o conteúdo e a borda */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 10px solid #33ff00;
+    border-right: 0px solid #33ff00;; /* Moldura verde ao redor da página */
+    box-sizing: border-box; /* Garante que o padding e a borda não excedam o tamanho da página */
 }
 
-.header {
+.cabecalho {
     display: flex;
     align-items: center;
     padding: 1px;
 }
 
-.header h1{
-    font-size:xx-large;
+.cabecalho h1 {
+    font-size: xx-large;
 }
 
-.header-image-IFSP{
-    height: 85px; /* Ajuste a altura das imagens conforme necessário */
+.imagem-cabecalho-IFSP {
+    height: 85px;
     padding-left: 100px;
     padding-right: 20px;
 }
-.header-image-SAS {
-    height: 100px; /* Ajuste a altura das imagens conforme necessário */
-    margin: 0 10px; /* Ajuste a margem para deixar espaço entre as imagens e o texto */
+
+.imagem-cabecalho-SAS {
+    height: 100px;
+    margin: 0 10px;
 }
 
-.header-buttons {
+.botoes-cabecalho {
     display: flex;
     align-items: center;
 }
 
-.header-button {
+.botao-cabecalho {
     background: none;
     border: none;
     padding: 0;
     margin: 0 5px;
 }
 
-.header-button img {
-    height: 40px; /* Ajuste a altura dos botões conforme necessário */
+.botao-cabecalho img {
+    height: 40px;
 }
 
 .container {
     width: 95%;
     margin: 0 auto;
     text-align: center;
+    overflow-x: auto;
 }
 
-#schedule-table {
+.agendamento-semanal {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Garante que a largura da tabela seja fixa */
+    table-layout: auto;
+    display: block;
+    overflow-x: auto;
 }
 
-#schedule-table th, #schedule-table td {
+.tabela-agendamento {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-agendamento th, .tabela-agendamento td {
     border: 1px solid #646060;
-    padding: 0; /* Remove padding das células */
-    margin: 0; /* Remove margem das células */
+    padding: 0;
+    margin: 0;
     text-align: center;
-    vertical-align: middle; /* Centraliza verticalmente */
-    box-sizing: border-box; /* Inclui bordas e padding no cálculo do tamanho */
-    height: 2em; /* Defina a altura fixa das células */
+    vertical-align: middle;
+    box-sizing: border-box;
+    height: 2em;
     overflow: hidden;
-    font-size: 15px; /* Ajusta o tamanho da fonte das células */
+    font-size: 15px;
+    white-space: nowrap;
 }
 
-#schedule-table th {
-    background: linear-gradient(135deg, #FFA000, #D19A3A);;
+.tabela-agendamento th {
+    background: linear-gradient(135deg, #FFA000, #D19A3A);
+    width: 150px;
 }
 
-.location-cell {
+.celula-local {
     font-weight: bold;
     background-color: #33ff00;
     text-align: left;
-    font-size: 10px; /* Ajusta o tamanho da fonte das células de local */
-    width: 200px; /* Defina a largura desejada para a coluna de locais */
+    font-size: 12px;
+    width: 250px;
 }
 
 td {
-    position: relative; /* Necessário para o posicionamento absoluto dos quadradinhos */
-    padding: 0; /* Remove padding das células */
+    position: relative;
+    padding: 0;
+    width: auto;
 }
 
-.time-slot {
-    width: 100%; /* Preenche toda a largura da célula */
-    height: 100%; /* Preenche toda a altura da célula */
-    background-color: #b3ffb3; /* Cor padrão dos quadradinhos */
+.slot-horario {
+    width: 100%;
+    height: 100%;
+    background-color: #b3ffb3;
     cursor: pointer;
-    box-sizing: border-box; /* Garante que bordas e padding não afetem o tamanho */
-    position: absolute; /* Permite que o quadradinho ocupe toda a célula */
-    top: 0; /* Posiciona no topo da célula */
-    left: 0; /* Posiciona à esquerda da célula */
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
     overflow: hidden;
 }
 
-.time-slot.selected {
-    background-color: #3399ff; /* Cor para quando o quadradinho é selecionado */
+.slot-horario.selecionado {
+    background-color: #3399ff;
+}
+
+.exibicao-semana {
+    font-size: 18px;
+    margin-left: 15px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgb(13, 255, 0); 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #FFA000, #D19A3A); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #bd7802, #9c732b); 
+  }
+
+@media (max-width: 768px) {
+    .cabecalho h1 {
+        font-size: large;
+    }
+
+    .celula-local {
+        width: 200px;
+    }
+
+    .tabela-agendamento th, .tabela-agendamento td {
+        font-size: 12px;
+    }
 }
