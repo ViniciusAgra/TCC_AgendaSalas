@@ -177,3 +177,18 @@ input:checked + .slider:before {
 .switch{
     margin-left: 10px;
 }
+
+/* Mensagens de cadastro */
+.cadConcluido{
+  margin-top: 20px;
+  width: 300px;
+  height: 150px;
+  color: #000;
+  background-color: #4CAF50;
+  border:#000;
+}
+.cadNegado{
+  color: #000;
+  background-color: #4CAF50;
+  border:#000;
+}
