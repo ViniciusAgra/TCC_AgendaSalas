@@ -1,4 +1,16 @@
 $(document).ready(function() {
+    // Manipulação do formulário de cadastro
+    $('#registerForm').submit(function(event) {
+        event.preventDefault();
+        var nome = $('input[name="Nome"]').val();
+        var email = $('input[name="Email"]').val();
+        var prontuario = $('input[name="Prontuario"]').val();
+        var senha = $('input[name="Senha"]').val();
+        var isAdmin = $('#admin').is(':checked');
+
+        alert('Usuário cadastrado: \nNome: ' + nome + '\nEmail: ' + email + '\nProntuário: ' + prontuario + '\nAdmin: ' + isAdmin);
+    });
+
     // Manipulação do formulário de deletar usuário
     $('#deleteUserForm').submit(function(event) {
         event.preventDefault();
@@ -11,17 +23,5 @@ $(document).ready(function() {
         event.preventDefault();
         var prontuario = $('#consultProntuario').val();
         alert('Consultando usuário com prontuário ' + prontuario);
-    });
-
-    // Manipulação do formulário de cadastro
-    $('#registerForm').submit(function(event) {
-        event.preventDefault();
-        var nome = $('#nome').val();
-        var email = $('#email').val();
-        var prontuario = $('#registerProntuario').val();
-        var senha = $('#senha').val();
-        var isAdmin = $('#isAdmin').is(':checked');
-
-        alert('Usuário cadastrado: \nNome: ' + nome + '\nEmail: ' + email + '\nProntuário: ' + prontuario + '\nAdmin: ' + isAdmin);
     });
 });

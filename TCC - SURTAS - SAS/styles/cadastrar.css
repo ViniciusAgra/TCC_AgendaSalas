@@ -1,194 +1,200 @@
 /* Corpo da página com fundo dividido */
 body {
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef);
-    display: flex;
-    height: 100vh;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at 0% 0%, #e3fdd9, #e9fae4, #f3ffef);
+  display: flex;
+  height: 100vh;
+  margin: 0;
 }
 
 /* Divisão do layout em dois lados */
 .left-side {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .right-side {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(90deg, #519631, #61c821);
-    gap: 20px; /* Espaçamento entre os cards da direita */
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #519631, #61c821);
+  gap: 20px; /* Espaçamento entre os cards da direita */
 }
 
 /* Estilo das caixas */
 .box {
-    background-color: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombras mais fortes */
-    text-align: center;
-    width: 350px;
-    position: relative;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombras mais fortes */
+  text-align: center;
+  width: 350px;
+  position: relative;
 }
 
 /* Estilo específico para o card maior na esquerda */
 .cadastro {
-    width: 400px;
+  width: 400px;
 }
 
 /* Estilo dos inputs */
 input {
-    display: block;
-    width: 90%; /* Limita a largura dos inputs */
-    max-width: 300px; /* Define um tamanho máximo */
-    padding: 10px;
-    margin: 10px auto; /* Centraliza o input */
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background: #e3fdd9;
-    font-size: 16px;
-    color: #000;
+  display: block;
+  width: 90%; /* Limita a largura dos inputs */
+  max-width: 300px; /* Define um tamanho máximo */
+  padding: 10px;
+  margin: 10px auto; /* Centraliza o input */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #e3fdd9;
+  font-size: 16px;
+  color: #000;
 }
 
 /* Placeholder dos inputs */
 input::placeholder {
-    color: #000;
-    opacity: 0.8;
-    font-size: 16px;
+  color: #000;
+  opacity: 0.8;
+  font-size: 16px;
 }
 
 /* Estilo dos botões */
 button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    color: white;
-    background-color: green;
-    max-width: 150px; /* Define o tamanho máximo para o botão */
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background-color: #61c821;
+  max-width: 150px; /* Define o tamanho máximo para o botão */
 }
 
 #Deletar{
-    background-color: red;
+  background-color: red;
 }
 
 /* Ajuste do wrapper dos botões */
 .button-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 /* Títulos */
 h2 {
-    font-size: 19px;
+  font-size: 19px;
 }
 h1, h2 {
-    margin: 0 5px; /* Maior espaçamento horizontal entre o título e as logos */
-    display: inline-block;
+  margin: 0 5px; /* Maior espaçamento horizontal entre o título e as logos */
+  display: inline-block;
 }
 
 /* Alinhamento horizontal do título e das imagens */
 .title-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Distribui o espaço entre os itens */
-    gap: 5px; /* Espaçamento entre os itens (logo e título) */
-    margin-bottom: 20px; /* Espaçamento abaixo do título e logo */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribui o espaço entre os itens */
+  gap: 5px; /* Espaçamento entre os itens (logo e título) */
+  margin-bottom: 20px; /* Espaçamento abaixo do título e logo */
 }
 
 /* Logos */
 img.logo-sas,
 img.logo-if {
-    width: 70px;
-    height: auto;
+  width: 70px;
+  height: auto;
 }
 
 /* Estilo do switch (toggle) */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 25px;
+position: relative;
+display: inline-block;
+width: 50px;
+height: 25px;
 }
 
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+opacity: 0;
+width: 0;
+height: 0;
 }
 
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 25px; /* Deixa o switch com bordas arredondadas */
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+transition: 0.4s;
+border-radius: 25px; /* Deixa o switch com bordas arredondadas */
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 19px;
-  width: 19px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%; /* Arredonda o botão */
+position: absolute;
+content: "";
+height: 19px;
+width: 19px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: 0.4s;
+border-radius: 50%; /* Arredonda o botão */
 }
 
 input:checked + .slider {
-  background-color: #4CAF50; /* Cor quando está ativado */
+background-color: #4CAF50; /* Cor quando está ativado */
 }
 
 input:checked + .slider:before {
-  transform: translateX(24px); /* Movimenta o botão quando ativado */
+transform: translateX(24px); /* Movimenta o botão quando ativado */
 }
 
 /* Switch arredondado */
 .slider.round {
-  border-radius: 25px;
+border-radius: 25px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+border-radius: 50%;
 }
 
 /* Alinhamento da toggle com os inputs */
 .admin-toggle {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    width: 90%; /* Largura igual aos inputs */
-    max-width: 300px;
-    margin: 10px auto; /* Centraliza o toggle */
-    font-size: 16px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 90%; /* Largura igual aos inputs */
+  max-width: 300px;
+  margin: 10px auto; /* Centraliza o toggle */
+  font-size: 16px;
 }
 .switch{
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 /* Mensagens de cadastro */
-.cadConcluido{
-  margin-top: 20px;
-  width: 300px;
-  height: 150px;
-  color: #000;
-  background-color: #4CAF50;
-  border:#000;
+.message {
+margin-top: 15px;
+border-radius: 4px;
+text-align: center;
+font-size: 1em;
+width: 100%;
 }
-.cadNegado{
-  color: #000;
-  background-color: #4CAF50;
-  border:#000;
+
+.message.success {
+color: #155724;
+text-align: center;
+font-weight: bolder;   
+}
+
+.message.error {
+color: #721c24;
+text-align: center;
+font-weight: bolder;
 }
