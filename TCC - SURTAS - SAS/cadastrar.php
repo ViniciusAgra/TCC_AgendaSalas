@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'ADM' => $ADMConsulta ? 'Sim' : 'Não'
             ];
         } else {
-            $_SESSION['consulta_result'] = null;
+            $_SESSION['consulta_error'] = 'Nenhum usuário encontrado com esse prontuário.';
         }
 
         $stmtConsulta->close();
@@ -235,18 +235,23 @@ $conexao->close();
           <button type="submit" name="consultar">Confirmar</button>
         </div>
       </form>
-      <?php if (isset($_SESSION['consulta_result'])): ?>
-        <div class="consulta-result">
-          <?php if ($_SESSION['consulta_result']): ?>
-            <p><strong>Nome:</strong> <?php echo $_SESSION['consulta_result']['Nome']; ?></p>
-            <p><strong>Email:</strong> <?php echo $_SESSION['consulta_result']['Email']; ?></p>
-            <p><strong>Senha:</strong> <?php echo $_SESSION['consulta_result']['Senha']; ?></p>
-            <p><strong>ADM:</strong> <?php echo $_SESSION['consulta_result']['ADM']; ?></p>
-          <?php else: ?>
-            <p>Nenhum usuário encontrado com esse prontuário.</p>
-          <?php endif; ?>
-          <?php unset($_SESSION['consulta_result']); ?>
+      <?php if (isset($_SESSION['consulta_error'])): ?>
+        <!-- Exibe a mensagem de erro se o prontuário não for encontrado -->
+        <div class="message error">
+          <?php 
+            echo $_SESSION['consulta_error'];
+            unset($_SESSION['consulta_error']);
+          ?>
         </div>
+      <?php elseif (isset($_SESSION['consulta_result'])): ?>
+        <!-- Exibe os dados do usuário se o prontuário for encontrado -->
+        <div class="consulta-result">
+          <p><strong>Nome:</strong> <?php echo $_SESSION['consulta_result']['Nome']; ?></p>
+          <p><strong>Email:</strong> <?php echo $_SESSION['consulta_result']['Email']; ?></p>
+          <p><strong>Senha:</strong> <?php echo $_SESSION['consulta_result']['Senha']; ?></p>
+          <p><strong>ADM:</strong> <?php echo $_SESSION['consulta_result']['ADM']; ?></p>
+        </div>
+        <?php unset($_SESSION['consulta_result']); ?>
       <?php endif; ?>
     </div>
   </div>
