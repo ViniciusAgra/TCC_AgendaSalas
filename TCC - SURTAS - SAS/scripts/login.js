@@ -1,19 +1,46 @@
 $(document).ready(function() {
-
     $('#loginForm').submit(function(event) {
         event.preventDefault();
 
         var username = $('#username').val();
         var password = $('#password').val();
 
-        if (username === 'admin' && password === 'admin') {
-            window.location.href = 'principal.html';
-        } else {
-            $('#error-message').text('Usuário e/ou senha inválidos. Tente novamente.')
-                .fadeIn(500)
-                .delay(4000)
-                .fadeOut(500);
+        if (username === '' || password === '') {
+            $('#error-message').text('Prontuário e senha são obrigatórios.')
+                .show() // Exibe imediatamente
+                .delay(4000) // Aguarda 4 segundos
+                .fadeOut(500); // Esconde lentamente
+            return;
         }
+
+        // Envia os dados para o servidor via AJAX
+        $.ajax({
+            url: 'index.php', // URL do arquivo PHP de login
+            type: 'POST',
+            dataType: 'json', // Definindo que esperamos um JSON de resposta
+            data: {
+                username: username,
+                password: password
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Redireciona para a página principal se o login for bem-sucedido
+                    window.location.href = 'principal.html';
+                } else {
+                    $('#error-message').text(response.message)
+                        .show() // Exibe imediatamente
+                        .delay(4000) // Aguarda 4 segundos
+                        .fadeOut(500); // Esconde lentamente
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText); // Exibe o erro no console para depuração
+                $('#error-message').text('Erro ao realizar login. Tente novamente.')
+                    .show() // Exibe imediatamente
+                    .delay(4000) // Aguarda 4 segundos
+                    .fadeOut(500); // Esconde lentamente
+            }
+        });
     });
 
     $('#togglePassword').click(function() {

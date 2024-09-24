@@ -39,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($Nome) || empty($Email) || empty($Prontuario) || empty($Senha)) {
             $_SESSION['message'] = 'Todos os campos são obrigatórios.';
             $_SESSION['msg_type'] = 'error';
-            header('Location: cadastrar.php');
+            header('Location:cadastrar.php');
             exit();
         }
 
         if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['message'] = 'Email inválido.';
             $_SESSION['msg_type'] = 'error';
-            header('Location: cadastrar.php');
+            header('Location:cadastrar.php');
             exit();
         }
 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (prontuarioExiste($conexao, $Prontuario)) {
             $_SESSION['message'] = 'Cadastro negado: Prontuário já existe.';
             $_SESSION['msg_type'] = 'error';
-            header('Location: cadastrar.php');
+            header('Location:cadastrar.php');
             exit();
         } else {
             // Prepara a consulta SQL para inserir novo usuário
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $stmt->close();
-            header('Location: cadastrar.php');
+            header('Location:cadastrar.php');
             exit();
         }
     }
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $stmtDelete->close();
-        header('Location: cadastrar.php');
+        header('Location:cadastrar.php');
         exit();
     }
 
@@ -138,11 +138,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'ADM' => $ADMConsulta ? 'Sim' : 'Não'
             ];
         } else {
-            $_SESSION['consulta_error'] = 'Nenhum usuário encontrado com esse prontuário.';
+            $_SESSION['consulta_result'] = null;
+            $_SESSION['consulta_message'] = 'Cadastro não encontrado.';
+            $_SESSION['consulta_msg_type'] = 'error';
         }
 
         $stmtConsulta->close();
-        header('Location: cadastrar.php');
+        header('Location:cadastrar.php');
         exit();
     }
 }
@@ -214,9 +216,9 @@ $conexao->close();
         <?php if (isset($_SESSION['delete_message'])): ?>
           <div class="message <?php echo $_SESSION['delete_msg_type']; ?>">
             <?php 
-              echo $_SESSION['delete_message']; 
-              unset($_SESSION['delete_message']);
-              unset($_SESSION['delete_msg_type']);
+                echo $_SESSION['delete_message']; 
+                unset($_SESSION['delete_message']);
+                unset($_SESSION['delete_msg_type']);
             ?>
           </div>
         <?php endif; ?>
@@ -232,26 +234,30 @@ $conexao->close();
       <form id="consultarForm" action="cadastrar.php" method="POST">
         <input type="text" name="ProntuarioConsulta" placeholder="Prontuário" required>
         <div class="button-wrapper">
-          <button type="submit" name="consultar">Confirmar</button>
+          <button id="Consultar" type="submit" name="consultar">Confirmar</button>
         </div>
+        <?php if (isset($_SESSION['consulta_message'])): ?>
+          <div class="message <?php echo $_SESSION['consulta_msg_type']; ?>">
+            <?php 
+                echo $_SESSION['consulta_message']; 
+                unset($_SESSION['consulta_message']);
+                unset($_SESSION['consulta_msg_type']);
+            ?>
+          </div>
+        <?php endif; ?>
       </form>
-      <?php if (isset($_SESSION['consulta_error'])): ?>
-        <!-- Exibe a mensagem de erro se o prontuário não for encontrado -->
-        <div class="message error">
-          <?php 
-            echo $_SESSION['consulta_error'];
-            unset($_SESSION['consulta_error']);
-          ?>
-        </div>
-      <?php elseif (isset($_SESSION['consulta_result'])): ?>
-        <!-- Exibe os dados do usuário se o prontuário for encontrado -->
+      <?php if (isset($_SESSION['consulta_result'])): ?>
         <div class="consulta-result">
-          <p><strong>Nome:</strong> <?php echo $_SESSION['consulta_result']['Nome']; ?></p>
-          <p><strong>Email:</strong> <?php echo $_SESSION['consulta_result']['Email']; ?></p>
-          <p><strong>Senha:</strong> <?php echo $_SESSION['consulta_result']['Senha']; ?></p>
-          <p><strong>ADM:</strong> <?php echo $_SESSION['consulta_result']['ADM']; ?></p>
+        <?php 
+        if ($_SESSION['consulta_result']): 
+          echo "<br><br>" . "<strong>Nome:</strong> " . $_SESSION['consulta_result']['Nome'] . "<br><br>";
+          echo "<strong>Email:</strong> " . $_SESSION['consulta_result']['Email'] . "<br><br>";
+          echo "<strong>Senha:</strong> " . $_SESSION['consulta_result']['Senha'] . "<br><br>";
+          echo "<strong>ADM:</strong> " . $_SESSION['consulta_result']['ADM'] . "<br><br>";
+        endif;
+        unset($_SESSION['consulta_result']);
+        ?>
         </div>
-        <?php unset($_SESSION['consulta_result']); ?>
       <?php endif; ?>
     </div>
   </div>
