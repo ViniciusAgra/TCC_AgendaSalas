@@ -8,7 +8,7 @@ $(document).ready(function() {
         var senha = $('input[name="Senha"]').val();
         var isAdmin = $('#admin').is(':checked');
 
-        alert('Usuário cadastrado: \nNome: ' + nome + '\nEmail: ' + email + '\nProntuário: ' + prontuario + '\nAdmin: ' + isAdmin);
+        //alert('Usuário cadastrado: \nNome: ' + nome + '\nEmail: ' + email + '\nProntuário: ' + prontuario + '\nAdmin: ' + isAdmin);
     });
 
     // Manipulação do formulário de deletar usuário

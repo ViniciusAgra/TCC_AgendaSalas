@@ -24,7 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verifica se o usuário foi encontrado
     if ($result->num_rows > 0) {
         $_SESSION['user'] = $Prontuario; // Armazena o prontuário na sessão
-        echo json_encode(['success' => true]);
+        
+        // Verifica se o usuário é a CTI
+        if (strtolower ($Prontuario) === 'cti') {
+            echo json_encode(['success' => true, 'redirect' => 'cadastrar.php']);
+        } else {
+            echo json_encode(['success' => true, 'redirect' => 'principal.html']);
+        }
+        exit(); // Importante para evitar a execução do restante do script após o redirecionamento
     } else {
         echo json_encode(['success' => false, 'message' => 'Prontuário ou senha inválidos.']);
     }
@@ -34,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">

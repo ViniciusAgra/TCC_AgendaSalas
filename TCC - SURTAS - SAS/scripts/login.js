@@ -23,9 +23,10 @@ $(document).ready(function() {
                 password: password
             },
             success: function(response) {
+                console.log(response);
                 if (response.success) {
-                    // Redireciona para a página principal se o login for bem-sucedido
-                    window.location.href = 'principal.html';
+                    // Redireciona para a URL retornada no JSON
+                    window.location.href = response.redirect;
                 } else {
                     $('#error-message').text(response.message)
                         .show() // Exibe imediatamente

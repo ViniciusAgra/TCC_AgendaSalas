@@ -83,34 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Verifica se o formulário de deletar foi enviado
-    if (isset($_POST['deletar']) && isset($_POST['ProntuarioDeletar'])) {
-        $ProntuarioDeletar = trim($_POST['ProntuarioDeletar']);
-
-        // Prepara a consulta SQL para deletar o usuário
-        $queryDelete = "DELETE FROM usuario WHERE Prontuario = ?";
-        $stmtDelete = $conexao->prepare($queryDelete);
-
-        if ($stmtDelete === false) {
-            die('Erro na preparação da consulta: ' . $conexao->error);
-        }
-
-        $stmtDelete->bind_param("s", $ProntuarioDeletar);
-
-        // Executa a consulta
-        if ($stmtDelete->execute() && $stmtDelete->affected_rows > 0) {
-            $_SESSION['delete_message'] = 'Usuário deletado com sucesso!';
-            $_SESSION['delete_msg_type'] = 'success';
-        } else {
-            $_SESSION['delete_message'] = 'Cadastro não encontrado ou erro ao deletar.';
-            $_SESSION['delete_msg_type'] = 'error';
-        }
-
-        $stmtDelete->close();
-        header('Location:cadastrar.php');
-        exit();
-    }
-
     // Verifica se o formulário de consulta foi enviado
     if (isset($_POST['consultar']) && isset($_POST['ProntuarioConsulta'])) {
         $ProntuarioConsulta = trim($_POST['ProntuarioConsulta']);
@@ -132,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtConsulta->bind_result($NomeConsulta, $EmailConsulta, $SenhaConsulta, $ADMConsulta);
             $stmtConsulta->fetch();
             $_SESSION['consulta_result'] = [
+                'Prontuario' => $ProntuarioConsulta,
                 'Nome' => $NomeConsulta,
                 'Email' => $EmailConsulta,
                 'Senha' => $SenhaConsulta,
@@ -146,6 +119,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtConsulta->close();
         header('Location:cadastrar.php');
         exit();
+    }
+
+    if (isset($_POST['deletar']) && isset($_POST['ProntuarioDeletar'])) {
+      $ProntuarioDeletar = trim($_POST['ProntuarioDeletar']);
+      // Prepara a consulta SQL para deletar o usuário
+      $queryDeletar = "DELETE FROM usuario WHERE Prontuario = ?";
+      $stmtDeletar = $conexao->prepare($queryDeletar);
+
+      if ($stmtDeletar === false) {
+        die('Erro na preparação da consulta: ' . $conexao->error);
+      }
+
+      $stmtDeletar->bind_param("s", $ProntuarioDeletar);
+
+      // Executa a consulta de deleção
+      if ($stmtDeletar->execute()) {
+        $_SESSION['mensagem'] = 'Usuário deletado com sucesso';
+      } else {
+        $_SESSION['mensagem'] = 'Erro ao deletar o usuário';
+      }
+
+      $stmtDeletar->close();
+      header('Location:cadastrar.php');
+      exit();
     }
 }
 
@@ -200,31 +197,8 @@ $conexao->close();
     </div>
   </div>
 
-  <!-- Cards menores na direita -->
+  <!-- Card menor na direita -->
   <div class="right-side">
-    <div class="box deletar">
-      <div class="title-wrapper">
-        <img src="imagens/LogoSAS.png" alt="Logo SAS" class="logo-sas">
-        <h2>Deletar Usuário</h2>
-        <img src="imagens/LogoIFSP.png" alt="Logo IFSP" class="logo-if">
-      </div>
-      <form id="deleteForm" action="cadastrar.php" method="POST">
-        <input type="text" name="ProntuarioDeletar" placeholder="Prontuário" required>
-        <div class="button-wrapper">
-          <button id="Deletar" type="submit" name="deletar">DELETAR</button>
-        </div>
-        <?php if (isset($_SESSION['delete_message'])): ?>
-          <div class="message <?php echo $_SESSION['delete_msg_type']; ?>">
-            <?php 
-                echo $_SESSION['delete_message']; 
-                unset($_SESSION['delete_message']);
-                unset($_SESSION['delete_msg_type']);
-            ?>
-          </div>
-        <?php endif; ?>
-      </form>
-    </div>
-
     <div class="box consultar">
       <div class="title-wrapper">
         <img src="imagens/LogoSAS.png" alt="Logo SAS" class="logo-sas">
@@ -246,18 +220,20 @@ $conexao->close();
           </div>
         <?php endif; ?>
       </form>
+
+      <!-- Exibe os dados do usuário consultado e o botão "Deletar" -->
       <?php if (isset($_SESSION['consulta_result'])): ?>
         <div class="consulta-result">
-        <?php 
-        if ($_SESSION['consulta_result']): 
-          echo "<br><br>" . "<strong>Nome:</strong> " . $_SESSION['consulta_result']['Nome'] . "<br><br>";
-          echo "<strong>Email:</strong> " . $_SESSION['consulta_result']['Email'] . "<br><br>";
-          echo "<strong>Senha:</strong> " . $_SESSION['consulta_result']['Senha'] . "<br><br>";
-          echo "<strong>ADM:</strong> " . $_SESSION['consulta_result']['ADM'] . "<br><br>";
-        endif;
-        unset($_SESSION['consulta_result']);
-        ?>
+          <p><strong>Nome:</strong> <?php echo $_SESSION['consulta_result']['Nome']; ?></p>
+          <p><strong>Email:</strong> <?php echo $_SESSION['consulta_result']['Email']; ?></p>
+          <p><strong>Senha:</strong> <?php echo $_SESSION['consulta_result']['Senha']; ?></p>
+          <p><strong>ADM:</strong> <?php echo $_SESSION['consulta_result']['ADM']; ?></p>
+          <form action="cadastrar.php" method="POST" onsubmit="return confirm('Tem certeza que deseja deletar este usuário?');">
+            <input type="hidden" name="ProntuarioDeletar" value="<?php echo $_SESSION['consulta_result']['Prontuario']; ?>">
+            <button id="Deletar" type="submit" name="deletar">DELETAR</button>
+          </form>
         </div>
+        <?php unset($_SESSION['consulta_result']); ?>
       <?php endif; ?>
     </div>
   </div>
