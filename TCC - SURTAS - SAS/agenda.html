@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Nova Reserva</title>
+    <link rel="stylesheet" href="styles/agenda.css">
+    <script src="scripts/agenda.js"></script> <!-- Mantém o link para o JS -->
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-button" onclick="voltar()">←</button>
+            <h1>CRIAR NOVA RESERVA</h1>
+        </div>
+        <form>
+            <div class="form-left">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" value="João Almeira dos Santos" disabled>
+                
+                <label for="dia">Dia</label>
+                <input type="date" id="dia" value="2024-07-15">
+
+                <label for="horario">Das</label>
+                <div class="horario">
+                    <select id="hora-inicio"></select>
+                    <span>às</span>
+                    <select id="hora-fim"></select>
+                </div>
+
+                <label for="sala">Sala</label>
+                <select id="sala"></select>
+
+                <label for="turma">Turma</label>
+                <select id="turma">
+                    <option>4º Informática Integrado</option>
+                    <!-- Outras opções -->
+                </select>
+            </div>
+
+            <div class="form-right">
+                <label for="outro-prof">Nome do outro professor</label>
+                <input type="text" id="outro-prof" placeholder="Opcional">
+
+                <label for="frequencia">Frequência</label>
+                <select id="frequencia">
+                    <option>Nenhuma</option>
+                    <option>Anualmente</option>
+                    <option>Mensalmente</option>
+                    <option>Semanalmente</option>
+                    <option>Diariamente</option>
+
+                </select>
+
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" placeholder="Opcional">
+
+                <button type="button" class="btn-reservar" onclick="reservar()">Reservar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

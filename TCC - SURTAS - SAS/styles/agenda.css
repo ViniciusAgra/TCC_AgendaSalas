@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E7F8E7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 1px; /* Adiciona um espaço entre o conteúdo e a borda */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 10px solid #33ff00;/* Moldura verde ao redor da página */
+    box-sizing: border-box; /* Garante que o padding e a borda não excedam o tamanho da página */
+}
+
+.container {
+    width: 600px;
+    padding: 20px;
+    background-color: #F1FFF1;
+    border: 5px solid #39B54A;
+    border-radius: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 24px;
+}
+
+.back-button {
+    background-color: white;
+    border: 2px solid #39B54A;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #39B54A;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #39B54A;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+input:disabled {
+    background-color: #d3d3d3;
+}
+
+.horario {
+    display: flex;
+    align-items: center;
+}
+
+.horario select {
+    width: auto;
+}
+
+.horario span {
+    margin: 0 10px;
+}
+
+.btn-reservar {
+    background-color: #139713;
+    border: 2px solid #39B54A;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-reservar:hover {
+    background-color: #04520e;
+    color: #ffffff;
+}
+
+.form-left, .form-right {
+    width: 48%;
+}
+
