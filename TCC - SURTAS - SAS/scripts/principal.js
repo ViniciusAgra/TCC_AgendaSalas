@@ -157,4 +157,22 @@ $(document).ready(function() {
     const hoje = new Date();
     gerarCabecalhoHorarios(); // Gera o cabeçalho de horários
     atualizarExibicaoSemana(hoje); // Exibe a semana atual por padrão
+
+    // Novo código para interação com células selecionáveis
+    let isSelecting = false;
+    let isAddingSelection = true;
+
+    $(document).on('mousedown', '.slot-horario.disponivel', function(e) {
+        e.preventDefault();
+        isAddingSelection = !$(this).hasClass('selecionado');
+        $(this).toggleClass('selecionado', isAddingSelection);
+
+        $(document).on('mousemove.select', '.slot-horario.disponivel', function () {
+            $(this).toggleClass('selecionado', isAddingSelection);
+        });
+
+        $(document).on('mouseup.select', function () {
+            $(document).off('mousemove.select mouseup.select');
+        });
+    });
 });

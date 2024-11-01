@@ -112,8 +112,10 @@ td {
     overflow: hidden;
 }
 
+/* Estado de Seleção das Células */
 .slot-horario.selecionado {
     background-color: #3399ff;
+    cursor: pointer;
 }
 
 .exibicao-semana {
