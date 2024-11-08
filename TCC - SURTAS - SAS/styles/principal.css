@@ -147,6 +147,82 @@ td {
     background: linear-gradient(135deg, #bd7802, #9c732b); 
   }
 
+.popup {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-conteudo {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    max-width: 80%;
+    position: relative;
+    text-align: left;
+}
+
+.popup .fechar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#excluir-reserva {
+    margin-top: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#popup-confirmacao {
+    position: fixed;
+    bottom: 20px;
+    left: 55%;
+    transform: translateX(-90%);
+    background-color: #80ff9e; /* verde */
+    padding: 10px 20px;
+    border-radius: 8px;
+    border-style:groove;
+    border-color: black;
+    color: #fff;
+    font-size: 18px;
+    z-index: 1000;
+    display: flex; /* Alinha os botões em linha */
+    align-items: center;
+    justify-content: center; /* Centraliza os botões */
+    gap: 30px; /* Espaço entre os botões */
+}
+
+#popup-confirmacao button {
+    border: none;
+    background: transparent;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#popup-confirmacao .botao-cancelar {
+    color: #dc3545; /* vermelho */
+}
+
+#popup-confirmacao .botao-confirmar {
+    color: #1a8f35; /* verde */
+}
+
 @media (max-width: 768px) {
     .cabecalho h1 {
         font-size: large;

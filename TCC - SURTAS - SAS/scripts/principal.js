@@ -64,14 +64,9 @@ $(document).ready(function() {
                             .attr('data-horario', horario)
                             .attr('data-local', local)
                             .attr('data-dia', idDia)
-                            .attr('data-data-completa', dataParaBD) // Atribui a data completa
-                            .click(function() {
-                                if ($(this).hasClass('disponivel')) {
-                                    $(this).toggleClass('selecionado');
-                                    // Aqui você pode adicionar lógica para capturar os dados necessários, incluindo a data completa
-                                    console.log(`Data: ${dataParaBD}, Horário: ${horario}, Local: ${local}`);
-                                }
-                            });
+                            .attr('data-data-completa', dataParaBD)
+                            .on('mousedown', iniciarSelecao);
+
                         $celula.append($slot);
                         $linha.append($celula);
                     }
@@ -85,14 +80,9 @@ $(document).ready(function() {
                     .attr('data-horario', horarioFinal)
                     .attr('data-local', local)
                     .attr('data-dia', idDia)
-                    .attr('data-data-completa', dataParaBD) // Atribui a data completa para o horário final
-                    .click(function() {
-                        if ($(this).hasClass('disponivel')) {
-                            $(this).toggleClass('selecionado');
-                            // Aqui você pode capturar os dados necessários
-                            console.log(`Data: ${dataParaBD}, Horário: ${horarioFinal}, Local: ${local}`);
-                        }
-                    });
+                    .attr('data-data-completa', dataParaBD)
+                    .on('mousedown', iniciarSelecao);
+
                 $celulaFinal.append($slotFinal);
                 $linha.append($celulaFinal);
 
@@ -161,18 +151,59 @@ $(document).ready(function() {
     // Novo código para interação com células selecionáveis
     let isSelecting = false;
     let isAddingSelection = true;
+    let selectedSlots = [];
 
-    $(document).on('mousedown', '.slot-horario.disponivel', function(e) {
+    function iniciarSelecao(e) {
         e.preventDefault();
+        isSelecting = true;
         isAddingSelection = !$(this).hasClass('selecionado');
         $(this).toggleClass('selecionado', isAddingSelection);
+        selectedSlots = [$(this)];
+    }
 
-        $(document).on('mousemove.select', '.slot-horario.disponivel', function () {
+    $(document).on('mousemove', '.slot-horario.disponivel', function() {
+        if (isSelecting) {
             $(this).toggleClass('selecionado', isAddingSelection);
-        });
-
-        $(document).on('mouseup.select', function () {
-            $(document).off('mousemove.select mouseup.select');
-        });
+            if (isAddingSelection) {
+                selectedSlots.push($(this));
+            }
+        }
     });
+
+    $(document).on('mouseup', function() {
+        if (isSelecting) {
+            isSelecting = false;
+            if (isAddingSelection && selectedSlots.length > 0) {
+                mostrarPopupConfirmacao();
+            }
+        }
+    });
+
+    function mostrarPopupConfirmacao() {
+        const popup = $('<div id="popup-confirmacao" class="popup-verde">');
+        const botaoConfirmar = $('<button class="botao-confirmar"><img src="imagens/correto.png" alt="Botão Confirma"></button>');
+        const botaoCancelar = $('<button class="botao-cancelar"><img src="imagens/incorreto.png" alt="Botão Exclui"></button>');
+    
+        popup.append(botaoCancelar, botaoConfirmar); // Adiciona os dois botões ao pop-up
+        $('body').append(popup);
+    
+        // Bloquear interações com a tabela
+        $('.slot-horario').css('pointer-events', 'none');
+    
+        // Exibir o pop-up
+        popup.show();
+    
+        // Evento para cancelar a seleção
+        botaoCancelar.click(function() {
+            selectedSlots.forEach(slot => slot.removeClass('selecionado'));
+            selectedSlots = [];
+            popup.remove();
+            $('.slot-horario').css('pointer-events', 'auto');
+        });
+    
+        // Evento para confirmar a seleção
+        botaoConfirmar.click(function() {
+            window.location.href = "agenda.html";
+        });
+    }    
 });
