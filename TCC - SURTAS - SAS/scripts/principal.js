@@ -152,20 +152,26 @@ $(document).ready(function() {
     let isSelecting = false;
     let isAddingSelection = true;
     let selectedSlots = [];
+    let linhaSelecionada = null;
 
     function iniciarSelecao(e) {
         e.preventDefault();
+        if ($('#popup-confirmacao').length > 0) return; // Bloqueia a interação se o pop-up estiver aberto
         isSelecting = true;
         isAddingSelection = !$(this).hasClass('selecionado');
         $(this).toggleClass('selecionado', isAddingSelection);
         selectedSlots = [$(this)];
+        linhaSelecionada = $(this).closest('tr').index(); // Armazena a linha da célula inicial
     }
 
     $(document).on('mousemove', '.slot-horario.disponivel', function() {
         if (isSelecting) {
-            $(this).toggleClass('selecionado', isAddingSelection);
-            if (isAddingSelection) {
-                selectedSlots.push($(this));
+            const linhaAtual = $(this).closest('tr').index();
+            if (linhaAtual === linhaSelecionada) { // Permite a seleção apenas na linha inicial
+                $(this).toggleClass('selecionado', isAddingSelection);
+                if (isAddingSelection) {
+                    selectedSlots.push($(this));
+                }
             }
         }
     });
