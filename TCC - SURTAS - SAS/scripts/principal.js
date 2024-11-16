@@ -151,7 +151,6 @@ $(document).ready(function() {
     // Novo código para interação com células selecionáveis
     let isSelecting = false;
     let isAddingSelection = true;
-    let selectedSlots = [];
     let linhaSelecionada = null;
 
     function iniciarSelecao(e) {
@@ -187,8 +186,8 @@ $(document).ready(function() {
 
     function mostrarPopupConfirmacao() {
         const popup = $('<div id="popup-confirmacao" class="popup-verde">');
-        const botaoConfirmar = $('<button class="botao-confirmar"><img src="imagens/correto.png" alt="Botão Confirma"></button>');
-        const botaoCancelar = $('<button class="botao-cancelar"><img src="imagens/incorreto.png" alt="Botão Exclui"></button>');
+        const botaoConfirmar = $('<button class="botao-confirmar"><img src="imagens/correto.png" alt="Botão Confirma" class="botao-popup"></button>');
+        const botaoCancelar = $('<button class="botao-cancelar"><img src="imagens/incorreto.png" alt="Botão Exclui" class="botao-popup"></button>');
     
         popup.append(botaoCancelar, botaoConfirmar); // Adiciona os dois botões ao pop-up
         $('body').append(popup);
@@ -201,15 +200,71 @@ $(document).ready(function() {
     
         // Evento para cancelar a seleção
         botaoCancelar.click(function() {
-            selectedSlots.forEach(slot => slot.removeClass('selecionado'));
-            selectedSlots = [];
-            popup.remove();
-            $('.slot-horario').css('pointer-events', 'auto');
+            desfazerSelecao();
         });
+        
     
         // Evento para confirmar a seleção
         botaoConfirmar.click(function() {
-            window.location.href = "agenda.html";
+            enviarDadosParaAgenda();
         });
-    }    
+    }
+
+    function desfazerSelecao() {
+        selectedSlots.forEach(slot => slot.removeClass('selecionado'));
+        selectedSlots = [];
+        $('#popup-confirmacao').remove(); // Remove o pop-up se estiver aberto
+        $('.slot-horario').css('pointer-events', 'auto'); // Restaura a interação com a tabela
+    }
+
+    function enviarDadosParaAgenda() {
+        if (!selectedSlots[0] || !selectedSlots[0].get(0)) {
+            alert('Nenhuma célula válida selecionada.');
+            return;
+        }
+    
+        const horarioInicio = obterHorarioInicio();
+        console.log('Horário de início:', horarioInicio);
+    
+        const horarioFim = calcularHorarioFim(obterHorarioFim());
+        console.log('Horário de fim:', horarioFim);
+    
+        const local = selectedSlots[0]?.get(0)?.dataset.local || '';
+        console.log('Local:', local);
+    
+        const dataCompleta = formatarData(selectedSlots[0]?.get(0)?.dataset.dataCompleta || '');
+        console.log('Data completa:', dataCompleta);
+    
+        if (horarioInicio && horarioFim && local && dataCompleta) {
+            const urlParams = new URLSearchParams({
+                horarioInicio,
+                horarioFim,
+                local,
+                dataCompleta
+            });
+    
+            console.log('URL gerado:', `agenda.html?${urlParams.toString()}`);
+            window.location.href = `agenda.html?${urlParams.toString()}`;
+        } else {
+            alert('Por favor, selecione corretamente as células antes de confirmar!');
+        }
+    }
+
+    function obterHorarioInicio() {
+        return selectedSlots[0]?.attr('data-horario') || '';
+    }
+    
+    function obterHorarioFim() {
+        return selectedSlots[selectedSlots.length - 1]?.attr('data-horario') || '';
+    }
+    
+    function calcularHorarioFim(horario) {
+        // Retorna exatamente o horário passado, sem alterações
+        return horario;
+    }
+
+    function formatarData(data) {
+        const [ano, mes, dia] = data.split('-');
+        return `${dia}/${mes}/${ano}`;
+    }
 });

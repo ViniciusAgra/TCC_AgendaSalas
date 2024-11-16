@@ -6,7 +6,7 @@
     <title>Criar Nova Reserva</title>
     <link rel="icon" href="imagens/LogoIF.png">
     <link rel="stylesheet" href="styles/agenda.css">
-    <script src="scripts/agenda.js"></script> <!-- Mantém o link para o JS -->
+    <script src="scripts/agenda.js"></script>
 </head>
 <body>
     <div class="container">
@@ -20,18 +20,22 @@
                 <input type="text" id="nome" value="João Almeira dos Santos" disabled>
                 
                 <label for="dia">Dia</label>
-                <input type="date" id="dia" value="2024-07-15">
+                <!-- Campo do dia será preenchido automaticamente -->
+                <input type="date" id="dia">
 
                 <label for="horario">Horário</label>
                 <div class="horario">
                     <span>Das</span>
+                    <!-- Campo de início será preenchido automaticamente -->
                     <select id="hora-inicio"></select>
                     <span>às</span>
+                    <!-- Campo de término será preenchido automaticamente -->
                     <select id="hora-fim"></select>
                 </div>
 
-                <label for="sala">Sala</label>
-                <select id="sala"></select>
+                <label for="local">Local</label>
+                <!-- Campo da sala será preenchido automaticamente -->
+                <select id="local"></select>
 
                 <label for="turma">Turma</label>
                 <select id="turma">
@@ -51,7 +55,6 @@
                     <option>Mensalmente</option>
                     <option>Semanalmente</option>
                     <option>Diariamente</option>
-
                 </select>
 
                 <label for="descricao">Descrição</label>
