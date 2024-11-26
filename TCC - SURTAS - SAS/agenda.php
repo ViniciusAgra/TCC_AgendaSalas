@@ -63,8 +63,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fim = isset($_POST['Fim']) ? trim($_POST['Fim']) : null;
     $descricao = isset($_POST['Descricao']) ? trim($_POST['Descricao']) : null;
     $professor = $_SESSION['user'] ?? null; // Assume que o prontuário do professor está armazenado na sessão
-    $professor2 = isset($_POST['Professor_2']) ? trim($_POST['Professor_2']) : null;
+    $professor2 = isset($_POST['Professor_2']) && !empty(trim($_POST['Professor_2'])) ? trim($_POST['Professor_2']) : null;
 
+    if ($professor2 !== null) {
+        $query = "SELECT 1 FROM usuario WHERE Prontuario = ?";
+        $stmt = $conexao->prepare($query);
+        $stmt->bind_param("s", $professor2);
+        $stmt->execute();
+        $stmt->store_result();
+    
+        if ($stmt->num_rows === 0) {
+            $_SESSION['mensagem'] = 'O segundo professor não existe, seu idiota';
+        }
+    
+        $stmt->close();
+    }
+    
     if (empty($sala) || empty($curso) || empty($periodo) || empty($dia) || empty($inicio) || empty($fim) || empty($descricao)) {
         $_SESSION['mensagem'] = 'Preencha todos os campos obrigatórios!';
     } elseif (!verificarDisponibilidade($conexao, $sala, $dia, $inicio, $fim)) {
@@ -186,8 +200,8 @@ $conexao->close();
             </div>
 
             <div class="form-right">
-                <label for="outro-prof">Nome do outro professor</label>
-                <input type="text" id="outro-prof" name="Professor_2" placeholder="Opcional" value="<?php echo isset($_POST['Professor_2']) ? htmlspecialchars($_POST['Professor_2']) : ''; ?>">
+                <label for="professor2">Nome do outro professor</label>
+                <input type="text" id="professor2" name="Professor_2" placeholder="Opcional" value="<?php echo isset($_POST['Professor_2']) ? htmlspecialchars($_POST['Professor_2']) : ''; ?>">
 
                 <label for="local">Local</label>
                 <!-- Campo da sala será preenchido automaticamente -->
