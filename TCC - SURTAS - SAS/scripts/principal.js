@@ -243,8 +243,8 @@ $(document).ready(function() {
                 dataCompleta
             });
     
-            console.log('URL gerado:', `agenda.html?${urlParams.toString()}`);
-            window.location.href = `agenda.html?${urlParams.toString()}`;
+            console.log('URL gerado:', `agenda.php?${urlParams.toString()}`);
+            window.location.href = `agenda.php?${urlParams.toString()}`;
         } else {
             alert('Por favor, selecione corretamente as células antes de confirmar!');
         }
