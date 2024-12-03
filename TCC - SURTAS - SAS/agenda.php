@@ -74,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         if ($stmt->num_rows === 0) {
             $_SESSION['mensagem'] = 'O segundo professor não existe, seu idiota';
+            $_SESSION['msg_type'] = 'error';
         }
     
         $stmt->close();
@@ -81,8 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (empty($sala) || empty($curso) || empty($periodo) || empty($dia) || empty($inicio) || empty($fim) || empty($descricao)) {
         $_SESSION['mensagem'] = 'Preencha todos os campos obrigatórios!';
+        $_SESSION['msg_type'] = 'error';
     } elseif (!verificarDisponibilidade($conexao, $sala, $dia, $inicio, $fim)) {
         $_SESSION['mensagem'] = 'A sala já está reservada para o horário selecionado.';
+        $_SESSION['msg_type'] = 'error';
     } else {
         // Insere a reserva no banco
         $query = "INSERT INTO reserva (Sala, Curso, Periodo, Dia, Professor, Professor_2, Inicio, Fim, Descricao) 
@@ -96,8 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sssssssss", $sala, $curso, $periodo, $dia, $professor, $professor2, $inicio, $fim, $descricao);
         if ($stmt->execute()) {
             $_SESSION['mensagem'] = 'Reserva realizada com sucesso!';
+            $_SESSION['msg_type'] = 'success';
         } else {
             $_SESSION['mensagem'] = 'Erro ao realizar reserva. Tente novamente.';
+            $_SESSION['msg_type'] = 'error';
         }
 
         $stmt->close();
@@ -230,12 +235,13 @@ $conexao->close();
                 <button type="submit" class="btn-reservar">Reservar</button>
             </div>
         </form>
-        <?php
-        if (isset($_SESSION['mensagem'])) {
-            echo "<p>{$_SESSION['mensagem']}</p>";
-            unset($_SESSION['mensagem']);
-        }
-        ?>
+        <div class="mensage <?php echo $_SESSION['consulta_msg_type']; ?>">
+            <?php 
+                echo $_SESSION['consulta_mensage']; 
+                unset($_SESSION['consulta_mensage']);
+                unset($_SESSION['consulta_msg_type']);
+            ?>
+        </div>
     </div>
 </body>
 </html>
